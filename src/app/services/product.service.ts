@@ -87,4 +87,14 @@ export class ProductService {
     return of(true);
   }
 
+  public getProduct(id : string) : Observable<Product>{
+    let product = this.products.find(p=>p.id==id);
+    if(product )return of(product);
+    else return throwError(()=>new Error("Product not found"));
+  }
+  public updateProduct(product : Product) : Observable<Product>{
+    this.products=this.products.map(p=>(p.id==product.id)?product:p);
+    return of(product);
+  }
+
 }

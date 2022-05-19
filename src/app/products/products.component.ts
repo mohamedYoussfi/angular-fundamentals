@@ -160,4 +160,8 @@ export class ProductsComponent implements OnInit {
     this.handleSearchProducts();
     this.currentPage=0;
   }
+
+  handleEditProduct(p: Product) {
+    this.router.navigateByUrl("/editProduct/"+p.id);
+  }
 }

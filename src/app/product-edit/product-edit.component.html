@@ -1,0 +1,28 @@
+<div class="container mt-3">
+  <div class="card col-md-6 offset-3">
+    <div class="card-body text-danger" *ngIf="errorMessage" >{{errorMessage}}</div>
+    <div class="card-body" *ngIf="editProductGroup">
+    <form [formGroup]="editProductGroup" (ngSubmit)="handleUpdateProduct()">
+      <div class="mb-3">
+        <label class="form-label">Id :</label>
+        <input type="text" formControlName="id" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Name:</label>
+        <input type="text" formControlName="name" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Price :</label>
+        <input type="text" formControlName="price" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Id :</label>
+        <input type="checkbox" formControlName="promotion" class="form-check">
+      </div>
+      <div class="d-grid">
+        <button class="btn btn-success">Update</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
