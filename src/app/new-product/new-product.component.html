@@ -1,0 +1,30 @@
+<div class="container mt-2">
+  <div class="card col-md-6 offset-3" >
+    <div class="card-header">New Product</div>
+    <div class="card-body">
+      <form [formGroup]="newProductFormGroup" (ngSubmit)="handleSaveProduct()">
+        <div class="mb-3">
+          <label class="form-label">Name :</label>
+          <input id="name" type="text" formControlName="name" class="form-control"
+                 [class.border-success]="(newProductFormGroup.get('name')!.touched || newProductFormGroup.get('name')!.dirty) && newProductFormGroup.get('name')!.valid"
+                 [class.border-danger]="(newProductFormGroup.get('name')!.touched || newProductFormGroup.get('name')!.dirty) && newProductFormGroup.get('name')!.invalid"
+          >
+          <small *ngIf="newProductFormGroup.controls['name'].errors && newProductFormGroup.controls['name'].touched" class="text-danger">
+            {{getErrorMessage('Name',newProductFormGroup.controls['name'].errors)}}</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Price :</label>
+          <input type="text" formControlName="price" class="form-control">
+          <small *ngIf="newProductFormGroup.controls['price'].errors && newProductFormGroup.controls['price'].touched" class="text-danger">{{getErrorMessage('Price',newProductFormGroup.controls['price'].errors)}}</small>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Selected :</label>
+          <input type="checkbox" formControlName="promoted" class="form-check">
+        </div>
+        <div class="d-grid">
+          <button [disabled]="!this.newProductFormGroup.valid" class="btn btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

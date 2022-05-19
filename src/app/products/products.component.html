@@ -1,0 +1,77 @@
+<div class="container mt-2">
+  <nav class="m-2 p-2 border border-info">
+    <button (click)="handleGetAllProducts()" class="btn btn-outline-info">
+      <i class="bi bi-save"></i>
+      All Products
+    </button>
+    <button (click)="getPromotedProducts()" class="btn btn-outline-info ms-2">
+      <i class="bi bi-save"></i>
+      Promoted Products
+    </button>
+    <button (click)="newProduct()" class="btn btn-outline-info ms-2">
+      <i class="bi bi-save"></i>
+      New Product
+    </button>
+  </nav>
+  <ng-template  #errorTemplate>
+    <div class="text-danger">{{errorMessage}}</div>
+  </ng-template>
+  <ng-container *ngIf="products;else errorTemplate">
+    <form [formGroup]="searchProductFormGroup" (ngSubmit)="handleNewReSearch()">
+      <div class="input-group">
+        <label class="input-group-text bg-white">Keyword</label>
+        <input type="text" class="form-control" formControlName="keyword">
+        <button class="btn btn-info"><i class="bi bi-search"></i></button>
+      </div>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <td><i  (click)="setSelection(!selectMode)" class="btn" [ngClass]="selectMode==true?'bi bi-check-square':'bi-square'" ></i></td>
+          <td>
+            <select (change)="setSelection(true)" [(ngModel)]="selection" class="form-select">
+              <option value="all">All</option>
+              <option value="promo">Promo</option>
+            </select>
+          </td>
+          <td *ngIf="selectedProducts.length>0">
+            <i class="btn btn-danger bi bi-trash ms-1" (click)="handleDeleteSelection()"></i>
+            <i class="btn btn-danger bi bi-heart-arrow ms-1" (click)="handlePromotion()"></i>
+          </td>
+        </tr>
+      </thead>
+      <thead>
+      <tr>
+        <td>ID</td><td>Name</td><td>Price</td><td>Promo</td><td></td>
+        <td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of products">
+        <td>
+          <i (click)="select(p)" [ngClass]="p.selected==true?'bi bi-check-square':'bi-square'" class="btn"></i>
+        </td>
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td><span *ngIf="p.promotion==true"  class="bi bi-check-circle text-success"></span></td>
+        <td>
+          <button [ngClass]="p.promotion==true?'btn-outline-danger':'btn-outline-success'" (click)="handlePromoteProduct(p)" class="btn">
+            <span>{{p.promotion==true?'Unselect':'Select'}}</span>
+          </button>
+        </td>
+        <td>
+          <button (click)="handleDeleteProduct(p)" class="btn btn-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <ul class="nav nav-pills">
+      <li *ngFor="let p of [].constructor(totalPages); let i=index">
+        <a [class.btn-outline-danger]="i==currentPage" class="btn btn-outline-info ms-1 mt-1" (click)="goToPage(i)">{{i}}</a>
+      </li>
+    </ul>
+  </ng-container>
+</div>
