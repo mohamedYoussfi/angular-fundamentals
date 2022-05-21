@@ -8,6 +8,9 @@ import { CustomersComponent } from './customers/customers.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AdminTemplateComponent } from './admin-template/admin-template.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ProductsComponent,
     CustomersComponent,
     NewProductComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    LoginComponent,
+    NavbarComponent,
+    AdminTemplateComponent
   ],
   imports: [
     BrowserModule,

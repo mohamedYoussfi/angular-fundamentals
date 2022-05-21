@@ -3,6 +3,7 @@ import {Product} from "../model/products.model";
 import {ProductService} from "../services/product.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -19,13 +20,13 @@ export class ProductsComponent implements OnInit {
   pageSize : number =5;
   totalPages! : number;
   currentAction! :string;
-  constructor(private productsService : ProductService, private fb:FormBuilder, private router: Router) {
+  constructor(private productsService : ProductService,
+              private fb:FormBuilder, private router: Router, public authService : AuthenticationService) {
   }
   ngOnInit(): void {
     this.searchProductFormGroup=this.fb.group({
       keyword : this.fb.control("")
     });
-    console.log("Products component => ngOnInit");
     this.handleGetAllProducts();
   }
   handleDeleteProduct(p: Product) {
@@ -57,7 +58,7 @@ export class ProductsComponent implements OnInit {
   }
 
   newProduct() {
-    this.router.navigateByUrl("/newProduct")
+    this.router.navigateByUrl("/admin/newProduct")
   }
 
   handlePromoteProduct(product: Product) {
@@ -162,6 +163,6 @@ export class ProductsComponent implements OnInit {
   }
 
   handleEditProduct(p: Product) {
-    this.router.navigateByUrl("/editProduct/"+p.id);
+    this.router.navigateByUrl("/admin/editProduct/"+p.id);
   }
 }

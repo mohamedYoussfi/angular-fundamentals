@@ -4,8 +4,7 @@
     <div class="card-body" *ngIf="editProductGroup">
     <form [formGroup]="editProductGroup" (ngSubmit)="handleUpdateProduct()">
       <div class="mb-3">
-        <label class="form-label">Id :</label>
-        <input type="text" formControlName="id" class="form-control">
+        <label class="form-label">Id : {{productId}}</label>
       </div>
       <div class="mb-3">
         <label class="form-label">Name:</label>

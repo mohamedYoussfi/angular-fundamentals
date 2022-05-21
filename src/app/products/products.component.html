@@ -8,7 +8,7 @@
       <i class="bi bi-save"></i>
       Promoted Products
     </button>
-    <button (click)="newProduct()" class="btn btn-outline-info ms-2">
+    <button *ngIf="this.authService.hasRole('ADMIN')" (click)="newProduct()" class="btn btn-outline-info ms-2">
       <i class="bi bi-save"></i>
       New Product
     </button>
@@ -25,7 +25,7 @@
       </div>
     </form>
     <table class="table">
-      <thead>
+      <thead *ngIf="this.authService.hasRole('ADMIN')">
         <tr>
           <td><i  (click)="setSelection(!selectMode)" class="btn" [ngClass]="selectMode==true?'bi bi-check-square':'bi-square'" ></i></td>
           <td>
@@ -48,24 +48,24 @@
       </thead>
       <tbody>
       <tr *ngFor="let p of products">
-        <td>
+        <td *ngIf="this.authService.hasRole('ADMIN')">
           <i (click)="select(p)" [ngClass]="p.selected==true?'bi bi-check-square':'bi-square'" class="btn"></i>
         </td>
         <td>{{p.id}}</td>
         <td>{{p.name}}</td>
         <td>{{p.price}}</td>
         <td><span *ngIf="p.promotion==true"  class="bi bi-check-circle text-success"></span></td>
-        <td>
+        <td *ngIf="this.authService.hasRole('ADMIN')">
           <button [ngClass]="p.promotion==true?'btn-outline-danger':'btn-outline-success'" (click)="handlePromoteProduct(p)" class="btn">
             <span>{{p.promotion==true?'Unselect':'Select'}}</span>
           </button>
         </td>
-        <td>
+        <td *ngIf="this.authService.hasRole('ADMIN')">
           <button (click)="handleDeleteProduct(p)" class="btn btn-danger">
             <i class="bi bi-trash"></i>
           </button>
         </td>
-        <td>
+        <td *ngIf="this.authService.hasRole('ADMIN')">
           <button (click)="handleEditProduct(p)" class="btn btn-success">
             <i class="bi bi-pencil-fill"></i>
           </button>

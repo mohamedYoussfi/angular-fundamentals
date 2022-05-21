@@ -1,0 +1,21 @@
+<div class="container mt-3" *ngIf="userFormGroup">
+  <div class="card col-md-6 offset-md-3">
+    <div class="card-header text-center"><h3>Authentication</h3></div>
+    <div class="card-body">
+      <form [formGroup]="userFormGroup" (ngSubmit)="handleLogin()">
+        <div class="mb-3">
+          <label class="form-label">Username:</label>
+          <input type="text" formControlName="username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password:</label>
+          <input type="password" formControlName="password" class="form-control">
+        </div>
+        <div class="d-grid">
+          <button class="btn btn-info">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
